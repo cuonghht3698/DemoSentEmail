@@ -34,7 +34,6 @@ namespace DemoSentEmail
         private void button1_Click(object sender, EventArgs e)
         {
             _email.Send(txtEmail.Text, txtCC.Text, txtBcc.Text, "Xin chào!", txtNoiDung.Text) ;
-            MessageBox.Show("Ok");
         }
     }
 }

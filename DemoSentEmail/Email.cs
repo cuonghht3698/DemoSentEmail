@@ -23,6 +23,11 @@ namespace DemoSentEmail
             //Nếu gửi email thành công, sẽ trả về kết quả: OK, không thành công sẽ trả về thông tin l�-i
             try
             {
+                if (!sendto.IsValidEmail())
+                {
+                     throw new Exception("Email người nhận không đúng định dạng");
+                }
+
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient(_server);
 
@@ -30,10 +35,20 @@ namespace DemoSentEmail
                 mail.To.Add(sendto);
                 if (cc != "" && cc != null)
                 {
+                    
+                    if (!cc.IsValidEmail())
+                    {
+                        throw new Exception("Email CC không đúng định dạng");
+                    }
                     mail.CC.Add(cc);
                 }
                 if (bcc != "" && bcc != null)
                 {
+
+                    if (!bcc.IsValidEmail())
+                    {
+                        throw new Exception("Email BCC không đúng định dạng");
+                    }
                     mail.Bcc.Add(bcc);
                 }
 
@@ -52,7 +67,7 @@ namespace DemoSentEmail
             }
             catch (Exception ex)
             {
-
+                throw;
             }
         }
     }
