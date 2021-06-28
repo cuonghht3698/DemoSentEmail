@@ -14,7 +14,7 @@ namespace DemoSentEmail
         private string _from = ConfigurationManager.AppSettings["Username"];
         private string _pass = ConfigurationManager.AppSettings["Password"];
 
-        public void Send(string sendto, string subject, string content)
+        public void Send(string sendto, string cc, string bcc, string subject, string content)
         {
             //sendto: Email receiver (người nhận)
             //subject: Tiêu đề email
@@ -27,6 +27,15 @@ namespace DemoSentEmail
 
                 mail.From = new MailAddress(_from);
                 mail.To.Add(sendto);
+                if (cc != "" || cc != null)
+                {
+                    mail.CC.Add(cc);
+                }
+                if (bcc != "" || bcc != null)
+                {
+                    mail.Bcc.Add(bcc);
+                }
+
                 mail.Subject = subject;
                 mail.IsBodyHtml = true;
                 mail.Body = content;
