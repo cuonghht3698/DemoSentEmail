@@ -13,6 +13,7 @@ namespace DemoSentEmail
 
         private string _from = ConfigurationManager.AppSettings["Username"];
         private string _pass = ConfigurationManager.AppSettings["Password"];
+        private string _server = ConfigurationManager.AppSettings["ServerClient"];
 
         public void Send(string sendto, string cc, string bcc, string subject, string content)
         {
@@ -23,15 +24,15 @@ namespace DemoSentEmail
             try
             {
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                SmtpClient SmtpServer = new SmtpClient(_server);
 
                 mail.From = new MailAddress(_from);
                 mail.To.Add(sendto);
-                if (cc != "" || cc != null)
+                if (cc != "" && cc != null)
                 {
                     mail.CC.Add(cc);
                 }
-                if (bcc != "" || bcc != null)
+                if (bcc != "" && bcc != null)
                 {
                     mail.Bcc.Add(bcc);
                 }
